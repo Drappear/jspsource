@@ -5,13 +5,13 @@
 <%
 request.setCharacterEncoding("utf-8");
 // register.jsp에서 사용자가 입력한 회원정보 가져오기
-String id = request.getParameter("userId");
+String userId = request.getParameter("userId");
 String name = request.getParameter("name");
 String password = request.getParameter("password");
 int age = Integer.parseInt(request.getParameter("age"));
 String email = request.getParameter("email");
 
-MemberDTO insertDto = new MemberDTO(id, name, password, age, email);
+MemberDTO insertDto = new MemberDTO(userId, name, password, age, email);
 
 	// dao create() 호출
 	MemberDAO dao = new MemberDAO();

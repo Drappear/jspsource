@@ -7,7 +7,7 @@
 
 	// login.jsp 입력 값 가져오기
 	MemberDTO dto = new MemberDTO();
-	dto.setUserid(request.getParameter("userId"));
+	dto.setUserId(request.getParameter("userId"));
 	dto.setPassword(request.getParameter("password"));
 	
 	// dao 메소드 호출

@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString
 public class MemberDTO {
 	// membertbl 필드랑 일치
-	private String userid;
+	private String userId;
 	private String name;
 	private String password;
 	private int age;

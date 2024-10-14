@@ -5,7 +5,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import dto.ChangeDTO;
 import dto.MemberDTO;
 
 // ~~~DAO : DB서버와 연동해서 DB작업 담당하는 클래스
@@ -95,7 +98,7 @@ public class MemberDAO {
 //			pstmt.setString(3, password);
 //			pstmt.setInt(4, age);
 //			pstmt.setString(5, email);
-			pstmt.setString(1, insertDto.getUserid());
+			pstmt.setString(1, insertDto.getUserId());
 			pstmt.setString(2, insertDto.getName());
 			pstmt.setString(3, insertDto.getPassword());
 			pstmt.setInt(4, insertDto.getAge());
@@ -112,8 +115,34 @@ public class MemberDAO {
 		return result;
 	}
 	
-	public void read() {
-		
+	public List<MemberDTO> read() {
+		List<MemberDTO> list = new ArrayList<>();
+		// 전체 회원 조회
+		try {
+			con = getConnection();
+			String sql = "SELECT userid, name, age, email FROM usertbl";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				// DTO 담기
+				MemberDTO dto = new MemberDTO();
+				
+				dto.setUserId(rs.getString("userid"));
+				dto.setName(rs.getString("name"));
+				dto.setAge(rs.getInt("age"));
+				dto.setEmail(rs.getString("email"));
+				
+				// list 추가
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(con, pstmt, rs);
+		}
+		return list;
 	}
 	
 	public MemberDTO login(MemberDTO dto) {
@@ -124,14 +153,14 @@ public class MemberDAO {
 			String sql = "SELECT userid, name FROM usertbl WHERE userid = ? AND password = ?";
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, dto.getUserid());
+			pstmt.setString(1, dto.getUserId());
 			pstmt.setString(2, dto.getPassword());
 			
 			rs = pstmt.executeQuery();
 			// rs에 담긴 내용을 ~DTO로 옮기기
 			if (rs.next()) {
 				loginDto = new MemberDTO();
-				loginDto.setUserid(rs.getString(1));
+				loginDto.setUserId(rs.getString(1));
 				loginDto.setName(rs.getString(2));				
 			}
 			
@@ -143,11 +172,48 @@ public class MemberDAO {
 		return loginDto;
 	}
 	
-	public void update() {
+	public int update(ChangeDTO chgDto) {
 		
+		int updateRow = 0;
+		
+		// 비밀번호 변경
+		try {
+			con = getConnection();
+			
+			String sql = "UPDATE usertbl SET password = ? WHERE userid = ? AND password = ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, chgDto.getChangePassword());
+			pstmt.setString(2, chgDto.getUserId());
+			pstmt.setString(3, chgDto.getCurrentPassword());
+			
+			updateRow = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(con, pstmt);
+		}
+		return updateRow;
 	}
 	
-	public void delete() {
-		
+	public int delete(String userId, String password) {
+		int deleteRow = 0;
+		// 회원 삭제
+		try {
+			con = getConnection();
+			String sql = "DELETE FROM usertbl WHERE userid = ? AND password = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, password);
+			
+			deleteRow = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(con, pstmt);
+		}
+		return deleteRow;
 	}
 }
