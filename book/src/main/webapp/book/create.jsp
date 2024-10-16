@@ -4,7 +4,7 @@
 
 <h3>Create</h3>
 
-<form>
+<form action="create_pro.jsp" method="post">
 	<div class="row mb-3">
 		<label for="code" class="col-sm-2 col-form-label">Code</label>
 		<div class="col-sm-10">
