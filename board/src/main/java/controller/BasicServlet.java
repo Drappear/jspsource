@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,14 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.ActionForward;
+import action.BoardCreateAction;
 import action.BoardDeleteAction;
 import action.BoardListAction;
 import action.BoardReadAction;
+import action.BoardReadCntAction;
 import action.BoardUpdateAction;
 
 /**
  * Servlet implementation class BasicServlet
  */
+//									5MB							50MB
+@MultipartConfig(maxFileSize = 1024*1024*5, maxRequestSize = 1024*1024*50)
 @WebServlet("*.do")
 public class BasicServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -46,6 +51,10 @@ public class BasicServlet extends HttpServlet {
 			action = new BoardUpdateAction("/read.do");
 		}else if(cmd.equals("/delete.do")) {
 			action = new BoardDeleteAction("/list.do");
+		}else if(cmd.equals("/create.do")) {
+			action = new BoardCreateAction("/list.do");
+		}else if(cmd.equals("/cntupdate.do")) {
+			action = new BoardReadCntAction("/read.do");
 		}
 		
 		ActionForward af = null;

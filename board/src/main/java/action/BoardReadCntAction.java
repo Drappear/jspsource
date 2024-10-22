@@ -3,13 +3,12 @@ package action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dto.BoardDTO;
 import lombok.AllArgsConstructor;
 import service.BoardService;
 import service.BoardServiceImpl;
 
 @AllArgsConstructor
-public class BoardDeleteAction implements Action {
+public class BoardReadCntAction implements Action {
 	
 	private String path;
 	
@@ -18,16 +17,12 @@ public class BoardDeleteAction implements Action {
 		
 		BoardService service = new BoardServiceImpl();
 		
-		BoardDTO deleteDto = new BoardDTO();
+		int bno = Integer.parseInt(request.getParameter("bno"));
 		
-		deleteDto.setBno(Integer.parseInt(request.getParameter("bno")));
-		deleteDto.setPassword(request.getParameter("password"));
+		// 조회수 업데이트
+		service.hitUpdate(bno);
 		
-		boolean deleteFlag = service.delete(deleteDto.getBno(), deleteDto.getPassword());
-		
-		if(!deleteFlag) {
-			path = "/modify.do?bno="+deleteDto.getBno();
-		}
+		path += "?bno="+bno;
 		
 		return new ActionForward(path, true);
 	}

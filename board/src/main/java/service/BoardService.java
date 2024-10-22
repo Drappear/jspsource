@@ -10,4 +10,6 @@ public interface BoardService {
 	boolean update(BoardDTO updateDto);
 	boolean delete(int bno, String password);
 	boolean create(BoardDTO insertDto);
+	
+	boolean hitUpdate(int bno);
 }

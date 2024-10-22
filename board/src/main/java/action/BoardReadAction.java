@@ -18,7 +18,7 @@ public class BoardReadAction implements Action {
 		
 		BoardService service = new BoardServiceImpl();
 		
-		int bno = Integer.parseInt(request.getParameter("bno"));
+		int bno = Integer.parseInt(request.getParameter("bno"));		
 		
 		BoardDTO dto = service.getRow(bno);
 		

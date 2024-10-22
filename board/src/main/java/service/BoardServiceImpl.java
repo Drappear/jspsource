@@ -16,8 +16,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardDTO getRow(int bno) {
-	
+	public BoardDTO getRow(int bno) {		
 		return dao.read(bno);
 	}
 
@@ -33,8 +32,12 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public boolean create(BoardDTO insertDto) {
-		// TODO Auto-generated method stub
-		return false;
+		return dao.insert(insertDto)==1?true:false;
+	}
+	
+	@Override
+	public boolean hitUpdate(int bno) {
+		return dao.updateReadCnt(bno)==1?true:false;
 	}
 
 }
