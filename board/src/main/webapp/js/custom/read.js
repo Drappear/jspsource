@@ -16,3 +16,10 @@ document.querySelector("#readForm .btn-primary").addEventListener("click", (e) =
 	actionForm.submit();
 })
 
+// 답변 클릭 시 actionForm action="/replyView.do" 수정 후 submit
+document.querySelector("#readForm .btn-secondary").addEventListener("click", (e) => {
+	e.preventDefault();
+	actionForm.action ="/replyView.do";
+	actionForm.submit();
+
+})

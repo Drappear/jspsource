@@ -17,6 +17,7 @@ import action.BoardDeleteAction;
 import action.BoardListAction;
 import action.BoardReadAction;
 import action.BoardReadCntAction;
+import action.BoardReplyAction;
 import action.BoardUpdateAction;
 
 /**
@@ -55,6 +56,10 @@ public class BasicServlet extends HttpServlet {
 			action = new BoardCreateAction("/list.do");
 		}else if(cmd.equals("/cntupdate.do")) {
 			action = new BoardReadCntAction("/read.do");
+		}else if(cmd.equals("/replyView.do")) {
+			action = new BoardReadAction("/board/reply.jsp");
+		}else if(cmd.equals("/reply.do")) {
+			action = new BoardReplyAction("/list.do");
 		}
 		
 		ActionForward af = null;

@@ -38,7 +38,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Board MVC<sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">Board MVC2</div>
             </a>
 
             <!-- Divider -->
@@ -49,6 +49,11 @@
                 <a class="nav-link" href="../board/create.jsp">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>새글작성</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/list.do?criteria=&keyword=&page=1&amount=10">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>글목록</span></a>
             </li>
 
             <!-- Divider -->

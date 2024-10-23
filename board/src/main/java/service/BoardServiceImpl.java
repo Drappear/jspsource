@@ -4,15 +4,16 @@ import java.util.List;
 
 import dao.BoardDAO;
 import dto.BoardDTO;
+import dto.SearchDTO;
 
 public class BoardServiceImpl implements BoardService {
 
 	private BoardDAO dao = new BoardDAO();
 	
 	@Override
-	public List<BoardDTO> listAll() {
+	public List<BoardDTO> listAll(SearchDTO searchDto) {
 		
-		return dao.getList();
+		return dao.getList(searchDto);
 	}
 
 	@Override
@@ -40,4 +41,13 @@ public class BoardServiceImpl implements BoardService {
 		return dao.updateReadCnt(bno)==1?true:false;
 	}
 
+	@Override
+	public boolean reply(BoardDTO boardDto) {
+		return dao.replyInsert(boardDto)==1?true:false;
+	}
+
+	@Override
+	public int getTotalRows() {
+		return dao.getTotalRows();
+	}
 }
