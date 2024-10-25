@@ -31,10 +31,23 @@
 			<div><a href="">${dto.attach}</a></div>
 		</div>		
 		
+		<input type="hidden" name="page" value="${searchDto.page}" />
+		<input type="hidden" name="amount" value="${searchDto.amount}" />
+		<input type="hidden" name="criteria" value="${searchDto.criteria}" />
+		<input type="hidden" name="keyword" value="${searchDto.keyword}" />
+		
 		<button type="submit" class="btn btn-primary">수정</button>
 		<button type="button" class="btn btn-danger">삭제</button>
 		<button type="button" class="btn btn-success">목록</button>
 	</form>	
 </div>
+<!-- 페이지 나누기 -->
+<form action="" method="get" id="actionForm">
+	<input type="hidden" name="bno" value="${dto.bno}" />
+	<input type="hidden" name="page" value="${searchDto.page}" />
+	<input type="hidden" name="amount" value="${searchDto.amount}" />
+	<input type="hidden" name="criteria" value="${searchDto.criteria}" />
+	<input type="hidden" name="keyword" value="${searchDto.keyword}" />
+</form>
 <script src = "/js/custom/modify.js"></script>
 <%@ include file="../include/footer.jsp" %>

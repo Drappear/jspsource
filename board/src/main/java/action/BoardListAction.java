@@ -34,7 +34,7 @@ public class BoardListAction implements Action {
 		
 		List<BoardDTO> list = service.listAll(searchDto);
 		
-		int total = service.getTotalRows();
+		int total = service.getTotalRows(searchDto);
 		PageDTO pageDto = new PageDTO(searchDto, total);
 		
 		request.setAttribute("list", list);

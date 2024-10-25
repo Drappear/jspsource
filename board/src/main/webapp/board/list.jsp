@@ -9,6 +9,8 @@
 		<div class="card-header py-3">
 		
 			<form action="/list.do" id="searchForm">
+				<input type="hidden" name="page" value="${pageDto.searchDto.page}"/>
+				<input type="hidden" name="amount" value="${pageDto.searchDto.amount}"/>
 				<select name="criteria" id="criteria" class="form-select">
 					<option value="n" <c:out value="${searchDto.criteria == null?'selected':''}"/>>------------</option>
 					<option value="title" <c:out value="${searchDto.criteria == 'title'?'selected':''}"/>>제목</option>

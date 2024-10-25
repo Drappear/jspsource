@@ -22,7 +22,11 @@
 			<label for="password">비밀번호</label>
 			<input type="password" class="form-control" id="password" name="password" required="required">
 		</div>
-		
+		<!-- 페이지 나누기 정보 -->
+		<input type="hidden" name="page" value="${searchDto.page}" />
+		<input type="hidden" name="amount" value="${searchDto.amount}" />
+		<input type="hidden" name="criteria" value="${searchDto.criteria}" />
+		<input type="hidden" name="keyword" value="${searchDto.keyword}" />
 		<!-- 부모글 정보 -->
 		<input type="hidden" name="re_ref" value="${dto.reRef}"/>
 		<input type="hidden" name="re_lev" value="${dto.reLev}"/>
@@ -33,6 +37,12 @@
 		<button type="button" class="btn btn-success">목록</button>
 	</form>
 </div>
-<form action="/list.do" method="get" id="actionForm"></form>
+<!-- 페이지 나누기 -->
+<form action="/list.do" method="get" id="actionForm">
+	<input type="hidden" name="page" value="${searchDto.page}" />
+	<input type="hidden" name="amount" value="${searchDto.amount}" />
+	<input type="hidden" name="criteria" value="${searchDto.criteria}" />
+	<input type="hidden" name="keyword" value="${searchDto.keyword}" />
+</form>
 <script src="/js/custom/reply.js"></script>
 <%@ include file="../include/footer.jsp" %>
